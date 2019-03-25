@@ -32,16 +32,10 @@ module PayPal::SDK::Core
         end
       end
 
-      # Default ca file
-      def default_ca_file
-        File.expand_path("../../../../../data/paypal.crt", __FILE__)
-      end
-
       # Apply ssl configuration to http object
       def configure_ssl(http)
         http.tap do |https|
           https.use_ssl = true
-          https.ca_file = default_ca_file
           https.verify_mode = OpenSSL::SSL::VERIFY_PEER
           begin
             https.ssl_version = :TLSv1_2
